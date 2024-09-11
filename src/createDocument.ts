@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_DAILY_MONEY_ONE, TAG_DEMO } from './constants';
+import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD,  TAG_AUTHORIZATION,  TAG_BOOKS,  TAG_DEMO } from './constants';
 
 export function createDocument(app: INestApplication) {
     //swagger
@@ -14,7 +14,8 @@ export function createDocument(app: INestApplication) {
             in: 'header',
         }, API_KEY_NAME)
         .addTag(TAG_DEMO)
-        .addTag(TAG_DAILY_MONEY_ONE)
+        .addTag(TAG_AUTHORIZATION)
+        .addTag(TAG_BOOKS)
         .build()
     return SwaggerModule.createDocument(app, config)
 }

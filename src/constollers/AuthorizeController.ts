@@ -1,5 +1,5 @@
 import { AppExceptionFilter } from '@/AppExceptionFilter'
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_DAILY_MONEY_ONE } from '@/constants'
+import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_AUTHORIZATION } from '@/constants'
 import { Fail } from '@/model/Fail'
 import { Result as Result } from '@/model/Result'
 import { AuthorizeService } from '@/services/AuthorizeService'
@@ -7,11 +7,11 @@ import { Body, Controller, Get, Head, Header, Headers, Post, Put, UseFilters } f
 import { ApiBody, ApiConsumes, ApiHeader, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
 
 
-@ApiTags(TAG_DAILY_MONEY_ONE)
+@ApiTags(TAG_AUTHORIZATION)
 @Controller('/api/authroize')
 @ApiResponse({ status: 400, description: 'The request is invalid or malformed.', type: Fail, example: Fail.Example })
 // @ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', type: Fail })
-export class AuthroizeController {
+export class AuthorizeController {
     constructor(private readonly authorizeService: AuthorizeService) { }
 
     @Get()
