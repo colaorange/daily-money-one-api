@@ -8,4 +8,6 @@ export class Message {
     static Example: Message = {
         message: 'All goes well'
     }
+
+    static ContentExample = { "application/json": { example: Message.Example } }
 }

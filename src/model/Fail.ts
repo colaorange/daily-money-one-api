@@ -11,4 +11,8 @@ export class Fail {
         code: 1450,
         message: 'Something went wrong'
     }
+
+    static ContentExample = { "application/json": { example: Fail.Example } }
 }
+
+

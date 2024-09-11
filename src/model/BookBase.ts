@@ -23,4 +23,6 @@ export class BookBase {
     static Example: BookBase = {
         name: 'The Book'
     }
+
+    static ContentExample = { "application/json": { example: BookBase.Example } }
 }

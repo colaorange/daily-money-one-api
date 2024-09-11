@@ -13,59 +13,60 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } fr
 @ApiTags(TAG_BOOKS)
 @Controller('/api/books')
 @ApiSecurity(API_KEY_NAME)
-@ApiResponse({ status: 400, description: 'The request is invalid or malformed.', type: Fail, example: Fail.Example })
-@ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', type: Fail })
+@ApiResponse({ status: 400, description: 'The request is invalid or malformed.', type: Fail, content: Fail.ContentExample })
+@ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', type: Fail, content: Fail.ContentExample })
 export class BooksController {
     constructor() { }
 
     @Get(':id')
-    @ApiOperation({ summary: "Get a book by it't id" })
-    @ApiResponse({ status: 200, type: Book, example: Book.Example })
-    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, example: Fail.Example })
+    @ApiOperation({ summary: "Get a book by it't id", operationId: "getBook" })
+    @ApiParam({ name: 'id', description: 'The id of the book' })
+    @ApiResponse({ status: 200, type: Book, content: Book.ContentExample })
+    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, content: Fail.ContentExample })
     getBook(@Param() id: string): Book {
         throw new NotImplementedException()
     }
 
     @Post()
-    @ApiOperation({ summary: 'Create a new book' })
+    @ApiOperation({ summary: 'Create a new book', operationId: "createBook" })
     @ApiBody({
         type: BookCreate,
         description: 'The content to create',
     })
-    @ApiResponse({ status: 201, description: 'The book was successfully created and returned.', type: Book, example: Book.Example })
+    @ApiResponse({ status: 201, description: 'The book was successfully created and returned.', type: Book, content: Book.ContentExample })
     createBook(@Body() bookCreate: BookCreate): Book {
         throw new NotImplementedException()
     }
 
     @Put(':id')
-    @ApiOperation({ summary: 'Update a book' })
+    @ApiOperation({ summary: 'Update a book', operationId: "updateBook" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiBody({
         type: BookUpdate,
         description: 'The content to update',
     })
-    @ApiResponse({ status: 200, description: 'The book was successfully updated and returned.', type: Book, example: Book.Example })
-    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, example: Fail.Example })
+    @ApiResponse({ status: 200, description: 'The book was successfully updated and returned.', type: Book, content: Book.ContentExample })
+    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, content: Fail.ContentExample })
     updateBook(@Param('id') id: string, @Body() bookUpdate: BookUpdate): Book {
         throw new NotImplementedException()
     }
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete a book' })
+    @ApiOperation({ summary: 'Delete a book', operationId: "deleteBook" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiBody({
         type: DeleteBookOption,
         description: 'The delete option',
         required: false
     })
-    @ApiResponse({ status: 200, description: 'The book was successfully deleted.', type: Result, example: Result.Example })
-    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, example: Fail.Example })
-    removeBook(@Param('id') id: string, @Body() deleteBookUpdate?: DeleteBookOption): Result {
+    @ApiResponse({ status: 200, description: 'The book was successfully deleted.', type: Result, content: Result.ContentExample })
+    @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, content: Fail.ContentExample })
+    deleteBook(@Param('id') id: string, @Body() deleteBookUpdate?: DeleteBookOption): Result {
         throw new NotImplementedException()
     }
 
     @Get()
-    @ApiOperation({ summary: 'List books' })
+    @ApiOperation({ summary: 'List books', operationId: "listBook" })
     @ApiBody({
         type: ListBookOption,
         description: 'The list condition',

@@ -10,4 +10,6 @@ export class Book extends BookBase{
         id: 'unique-id',
         name: 'The Book'
     }
+
+    static ContentExample = { "application/json": { example: Book.Example } }
 }

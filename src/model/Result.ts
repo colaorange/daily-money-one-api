@@ -10,4 +10,6 @@ export class Result {
     static Example: Result = {
         message: 'All goes well'
     }
+
+    static ContentExample = { "application/json": { example: Result.Example } }
 }
