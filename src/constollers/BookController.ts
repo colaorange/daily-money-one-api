@@ -1,4 +1,4 @@
-import { API_KEY_NAME, TAG_BOOKS } from '@/constants'
+import { API_KEY_NAME, TAG_BOOK } from '@/constants'
 import { Book } from '@/model/Book'
 import { BookCreate } from '@/model/BookCreate'
 import { BookUpdate } from '@/model/BookUpdate'
@@ -10,16 +10,16 @@ import { Body, Controller, Delete, Get, NotImplementedException, Param, Post, Pu
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
 
 
-@ApiTags(TAG_BOOKS)
-@Controller('/api/books')
+@ApiTags(TAG_BOOK)
+@Controller('/api')
 @ApiSecurity(API_KEY_NAME)
 @ApiResponse({ status: 400, description: 'The request is invalid or malformed.', type: Fail, content: Fail.ContentExample })
 @ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', type: Fail, content: Fail.ContentExample })
-export class BooksController {
+export class BookController {
     constructor() { }
 
-    @Get(':id')
-    @ApiOperation({ summary: "Get a book by it't id", operationId: "getBook" })
+    @Get('book/:id')
+    @ApiOperation({ summary: "Get a book by its id", operationId: "getBook" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiResponse({ status: 200, type: Book, content: Book.ContentExample })
     @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, content: Fail.ContentExample })
@@ -27,23 +27,29 @@ export class BooksController {
         throw new NotImplementedException()
     }
 
-    @Post()
+    @Post('book')
     @ApiOperation({ summary: 'Create a new book', operationId: "createBook" })
     @ApiBody({
         type: BookCreate,
         description: 'The content to create',
+        schema: {
+            example: BookCreate.Example
+        }
     })
     @ApiResponse({ status: 201, description: 'The book was successfully created and returned.', type: Book, content: Book.ContentExample })
     createBook(@Body() bookCreate: BookCreate): Book {
         throw new NotImplementedException()
     }
 
-    @Put(':id')
+    @Put('book/:id')
     @ApiOperation({ summary: 'Update a book', operationId: "updateBook" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiBody({
         type: BookUpdate,
         description: 'The content to update',
+        schema: {
+            example: BookUpdate.Example
+        }
     })
     @ApiResponse({ status: 200, description: 'The book was successfully updated and returned.', type: Book, content: Book.ContentExample })
     @ApiResponse({ status: 404, description: 'Book of the id is not found', type: Fail, content: Fail.ContentExample })
@@ -51,7 +57,7 @@ export class BooksController {
         throw new NotImplementedException()
     }
 
-    @Delete(':id')
+    @Delete('book/:id')
     @ApiOperation({ summary: 'Delete a book', operationId: "deleteBook" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiBody({
@@ -65,8 +71,15 @@ export class BooksController {
         throw new NotImplementedException()
     }
 
-    @Get()
-    @ApiOperation({ summary: 'List books', operationId: "listBook" })
+    @Get('books')
+    @ApiOperation({ summary: 'List all books', operationId: "listBookAll" })
+    @ApiResponse({ status: 200, description: 'Return all books.', type: [Book] })
+    listBookAll() {
+        throw new NotImplementedException()
+    }
+
+    @Put('books')
+    @ApiOperation({ summary: 'List books with a filter', operationId: "listBook" })
     @ApiBody({
         type: ListBookOption,
         description: 'The list condition',

@@ -2,27 +2,19 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export class BookBase {
 
-    @ApiProperty({ description: ''})
-    name: string
-
-    @ApiProperty({ description: '', required: false })
+    @ApiProperty({ description: '', required: false, nullable: true })
     currency?: string | null
 
-    @ApiProperty({ description: '', required: false })
+    @ApiProperty({ description: '', required: false, nullable: true  })
     fractionDigits?: number | null
 
-    @ApiProperty({ description: '', required: false })
+    @ApiProperty({ description: '', required: false, nullable: true  })
     symbol?: string | null
 
-    @ApiProperty({ description: '', required: false })
+    @ApiProperty({ description: '', required: false, nullable: true  })
     note?: string | null
 
-    @ApiProperty({ description: '', required: false })
+    @ApiProperty({ description: '', required: false, nullable: true  })
     priority?: number | null
-
-    static Example: BookBase = {
-        name: 'The Book'
-    }
-
-    static ContentExample = { "application/json": { example: BookBase.Example } }
+    
 }

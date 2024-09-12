@@ -19,7 +19,7 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "//.1": "",
-        "genDefinition": "ts-node -r tsconfig-paths/register src/cli/genDefinition"
+        "genApi": "ts-node -r tsconfig-paths/register src/cli/genApi"
     },
     "dependencies": {
         "@nestjs/common": "^10.0.0",

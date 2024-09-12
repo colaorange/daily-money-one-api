@@ -17,11 +17,11 @@ describe('AuthorizeController', () => {
 
     describe('root', () => {
         it('should return "OK abc"', () => {
-            const r = authorizeController.authroizeGet({ 'connection-password': 'abc' })
+            const r = authorizeController.authorizeGet({ 'connection-password': 'abc' })
             expect(r.message).toBe("OK abc")
         })
         it('should return "OK def"', () => {
-            const r = authorizeController.authroizePost('def')
+            const r = authorizeController.authorizePost('def')
             expect(r.message).toBe("OK def")
         })
     })

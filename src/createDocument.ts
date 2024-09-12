@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD,  TAG_AUTHORIZATION,  TAG_BOOKS,  TAG_DEMO } from './constants';
+import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_ACCOUNT, TAG_AUTHORIZATION, TAG_BOOK, TAG_MISC, TAG_REPORT, TAG_TRANSACTION } from './constants';
+import { AccountType } from './model/AccountType';
 
 export function createDocument(app: INestApplication) {
     //swagger
@@ -13,10 +14,30 @@ export function createDocument(app: INestApplication) {
             name: HEADER_CONNECTION_PASSWORD,
             in: 'header',
         }, API_KEY_NAME)
-        .addTag(TAG_DEMO)
+        // .addTag(TAG_DEMO)
         .addTag(TAG_AUTHORIZATION)
-        .addTag(TAG_BOOKS)
+        .addTag(TAG_BOOK)
+        .addTag(TAG_ACCOUNT)
+        .addTag(TAG_TRANSACTION)
+        .addTag(TAG_REPORT)
+        .addTag(TAG_MISC)
         .build()
-    return SwaggerModule.createDocument(app, config)
+    const doc = SwaggerModule.createDocument(app, config)
+
+    //for reuse enum 
+    doc.components.schemas['AccountType'] = {
+        type: 'string',
+        enum: Object.values(AccountType)
+    }
+    
+    //sort
+    doc.components.schemas = Object.keys(doc.components.schemas)
+        .sort((a, b) => a.localeCompare(b))
+        .reduce((acc, key) => {
+            acc[key] = doc.components.schemas[key];
+            return acc;
+        }, {});
+
+    return doc
 }
 

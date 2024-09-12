@@ -5,14 +5,14 @@ import { NestFactory } from '@nestjs/core';
 import { writeFileSync } from 'fs';
 import * as path from 'path';
 
-async function genDefinition() {
+async function genApi() {
     const app = await NestFactory.create(AppModule);
 
     const document = createDocument(app)
 
     const definitionPath = path.resolve(process.cwd(), './dist/api-definition.json')
 
-    writeFileSync(definitionPath, JSON.stringify(document));
+    writeFileSync(definitionPath, JSON.stringify(document, undefined, 2));
 
     console.log(`definition has been generated successfully at ${definitionPath}`);
 
@@ -20,7 +20,7 @@ async function genDefinition() {
 }
 
 function main() {
-    genDefinition()
+    genApi()
 }
 
 
