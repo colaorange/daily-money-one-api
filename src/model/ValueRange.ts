@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-export class DatetimeRange{
+export class ValueRange{
     
     @ApiProperty({ description: '', required: false})
     min?: number

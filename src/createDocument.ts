@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_ACCOUNT, TAG_AUTHORIZATION, TAG_BOOK, TAG_MISC, TAG_REPORT, TAG_TRANSACTION } from './constants';
+import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_ACCOUNT, TAG_BOOK, TAG_BASIC, TAG_REPORT, TAG_TRANSACTION } from './constants';
 import { AccountType } from './model/AccountType';
 
 export function createDocument(app: INestApplication) {
@@ -8,19 +8,17 @@ export function createDocument(app: INestApplication) {
     const config = new DocumentBuilder()
         .setTitle('Daily Money One API')
         .setDescription('Daily Money One Server Mode API')
-        .setVersion('1.0')
+        .setVersion('1.0.0')
         .addApiKey({
             type: 'apiKey',
             name: HEADER_CONNECTION_PASSWORD,
             in: 'header',
         }, API_KEY_NAME)
-        // .addTag(TAG_DEMO)
-        .addTag(TAG_AUTHORIZATION)
+        .addTag(TAG_BASIC)
         .addTag(TAG_BOOK)
         .addTag(TAG_ACCOUNT)
         .addTag(TAG_TRANSACTION)
         .addTag(TAG_REPORT)
-        .addTag(TAG_MISC)
         .build()
     const doc = SwaggerModule.createDocument(app, config)
 
@@ -29,15 +27,39 @@ export function createDocument(app: INestApplication) {
         type: 'string',
         enum: Object.values(AccountType)
     }
-    
-    //sort
-    doc.components.schemas = Object.keys(doc.components.schemas)
-        .sort((a, b) => a.localeCompare(b))
-        .reduce((acc, key) => {
-            acc[key] = doc.components.schemas[key];
-            return acc;
-        }, {});
 
+    //sort path
+    doc.paths = sortProperty(doc.paths, undefined, (path) => {
+        //sort method
+        return sortProperty(path, ['get', 'post', 'put', 'delete'])
+    })
+    //sort schema
+    doc.components.schemas = sortProperty(doc.components.schemas, undefined, (schema) => {
+        //sort properties
+        if(schema['properties']){
+            schema['properties'] = sortProperty(schema['properties'])
+        }
+        return schema;
+    })
     return doc
 }
 
+function sortProperty<T, I>(object: T, order?: string[], transform?: (item: I) => I) {
+    const orderMap = order && new Map(order.map((value, index) => [value, index]));
+    return Object.keys(object)
+        .sort((a, b) => {
+            if (orderMap) {
+                const indexA = orderMap.has(a) ? orderMap.get(a)! : order.length;
+                const indexB = orderMap.has(b) ? orderMap.get(b)! : order.length;
+                const r = indexA - indexB
+                if (r !== 0) {
+                    return r
+                }
+            }
+            return a.localeCompare(b)
+        })
+        .reduce((acc, key) => {
+            acc[key] = transform ? transform(object[key]) : object[key];
+            return acc;
+        }, {});
+}

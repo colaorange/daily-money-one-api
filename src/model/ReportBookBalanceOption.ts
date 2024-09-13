@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { DatetimeRange } from "./DatetimeRange";
 import { AccountType, AccountTypeRefPath } from "./AccountType";
 
-export class ReportBalanceOption{
+export class ReportBookBalanceOption{
 
     @ApiProperty({ description: "Transfer Datetime range to include", required: false })
     transDatetimeRange?: DatetimeRange
@@ -22,7 +22,7 @@ export class ReportBalanceOption{
     })
     accountTypes?: AccountType[]
 
-    static Example: ReportBalanceOption = {
+    static Example: ReportBookBalanceOption = {
         transDatetimeRange: {
             from: 1704067200000,
             to: 1735689599000,

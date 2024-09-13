@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 
 export class Message {
 
@@ -9,5 +9,12 @@ export class Message {
         message: 'All goes well'
     }
 
-    static ContentExample = { "application/json": { example: Message.Example } }
+    static Content = {
+        "application/json": {
+            schema: {
+                $ref: getSchemaPath(Message)
+            },
+            example: Message.Example
+        }
+    }
 }

@@ -8,7 +8,7 @@ import { Book } from "./Book"
 //needs ApiExtraModels for schema that included in additionalProperties.#ref
 @ApiExtraModels(AccountTypeBalance)
 @ApiExtraModels(AccountBalance)
-export class BalanceReport {
+export class BookBalanceReport {
 
     @ApiProperty({ description: "The book instance of the report" })
     book: Book
@@ -32,7 +32,7 @@ export class BalanceReport {
     accountTypes: Partial<Record<AccountType, AccountTypeBalance>>
 
 
-    static Example: BalanceReport = {
+    static Example: BookBalanceReport = {
         book: {
             id: 'unique-id',
             name: 'The Book'
@@ -58,6 +58,13 @@ export class BalanceReport {
         }
     }
 
-    static ContentExample = { "application/json": { example: BalanceReport.Example } }
+    static Content = {
+        "application/json": {
+            schema: {
+                $ref: getSchemaPath(BookBalanceReport)
+            },
+            example: BookBalanceReport.Example
+        }
+    }
 }
 

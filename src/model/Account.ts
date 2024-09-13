@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 import { AccountBase } from './AccountBase'
 import { AccountType, AccountTypeRefPath } from './AccountType'
 
@@ -23,5 +23,12 @@ export class Account extends AccountBase {
         type: AccountType.ASSET,
     }
 
-    static ContentExample = { "application/json": { example: Account.Example } }
+    static Content = {
+        "application/json": {
+            schema: {
+                $ref: getSchemaPath(Account)
+            },
+            example: Account.Example
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 
 export class Fail {
     @ApiProperty({ description: 'The fail code', required: false })
@@ -12,7 +12,14 @@ export class Fail {
         message: 'Something went wrong'
     }
 
-    static ContentExample = { "application/json": { example: Fail.Example } }
+    static Content = {
+        "application/json": {
+            schema: {
+                $ref: getSchemaPath(Fail)
+            },
+            example: Fail.Example
+        }
+    }
 }
 
 

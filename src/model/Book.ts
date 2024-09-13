@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 import { BookBase } from './BookBase'
 
 export class Book extends BookBase{
@@ -14,5 +14,12 @@ export class Book extends BookBase{
         name: 'The Book'
     }
 
-    static ContentExample = { "application/json": { example: Book.Example } }
+    static Content = {
+        "application/json": {
+            schema: {
+                $ref: getSchemaPath(Book)
+            },
+            example: Book.Example
+        }
+    }
 }

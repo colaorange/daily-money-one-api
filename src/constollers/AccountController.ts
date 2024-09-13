@@ -7,22 +7,25 @@ import { Fail } from '@/model/Fail'
 import { ListAccountOption } from '@/model/ListAccountOption'
 import { Result } from '@/model/Result'
 import { Body, Controller, Delete, Get, NotImplementedException, Param, Post, Put } from '@nestjs/common'
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiExtraModels, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
 
 
 @ApiTags(TAG_ACCOUNT)
 @Controller('/api')
 @ApiSecurity(API_KEY_NAME)
-@ApiResponse({ status: 400, description: 'The request is invalid or malformed.', type: Fail, content: Fail.ContentExample })
-@ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', type: Fail, content: Fail.ContentExample })
+@ApiResponse({ status: 400, description: 'The request is invalid or malformed.', content: Fail.Content })
+@ApiResponse({ status: 403, description: 'You do not have the required permissions to perform this request.', content: Fail.Content })
+//needs ApiExtraModels for schema that are not auto included by only content
+@ApiExtraModels(Fail)
+@ApiExtraModels(Result)
 export class AccountController {
     constructor() { }
 
     @Get('account/:id')
     @ApiOperation({ summary: "Get a account by its id", operationId: "getAccount" })
     @ApiParam({ name: 'id', description: 'The id of the account' })
-    @ApiResponse({ status: 200, type: Account, content: Account.ContentExample })
-    @ApiResponse({ status: 404, description: 'Account of the id is not found', type: Fail, content: Fail.ContentExample })
+    @ApiResponse({ status: 200, type: Account, content: Account.Content })
+    @ApiResponse({ status: 404, description: 'Account of the id is not found', content: Fail.Content })
     getAccount(@Param() id: string): Account {
         throw new NotImplementedException()
     }
@@ -36,7 +39,7 @@ export class AccountController {
             example: AccountCreate.Example
         }
     })
-    @ApiResponse({ status: 201, description: 'The account was successfully created and returned.', type: Account, content: Account.ContentExample })
+    @ApiResponse({ status: 201, description: 'The account was successfully created and returned.', content: Account.Content })
     createAccount(@Body() accountCreate: AccountCreate): Account {
         throw new NotImplementedException()
     }
@@ -51,8 +54,8 @@ export class AccountController {
             example: AccountUpdate.Example
         }
     })
-    @ApiResponse({ status: 200, description: 'The account was successfully updated and returned.', type: Account, content: Account.ContentExample })
-    @ApiResponse({ status: 404, description: 'Account of the id is not found', type: Fail, content: Fail.ContentExample })
+    @ApiResponse({ status: 200, description: 'The account was successfully updated and returned.', content: Account.Content })
+    @ApiResponse({ status: 404, description: 'Account of the id is not found', content: Fail.Content })
     updateAccount(@Param('id') id: string, @Body() accountUpdate: AccountUpdate): Account {
         throw new NotImplementedException()
     }
@@ -65,8 +68,8 @@ export class AccountController {
         description: 'The delete option',
         required: false
     })
-    @ApiResponse({ status: 200, description: 'The account was successfully deleted.', type: Result, content: Result.ContentExample })
-    @ApiResponse({ status: 404, description: 'Account of the id is not found', type: Fail, content: Fail.ContentExample })
+    @ApiResponse({ status: 200, description: 'The account was successfully deleted.', content: Result.Content })
+    @ApiResponse({ status: 404, description: 'Account of the id is not found', content: Fail.Content })
     deleteAccount(@Param('id') id: string, @Body() deleteAccountUpdate?: DeleteAccountOption): Result {
         throw new NotImplementedException()
     }
@@ -74,7 +77,7 @@ export class AccountController {
     @Get('accounts')
     @ApiOperation({ summary: 'List all accounts', operationId: "listAccountAll" })
     @ApiResponse({ status: 200, description: 'Return all accounts.', type: [Account] })
-    listAccountAll() {
+    listAccountAll(): Account[] {
         throw new NotImplementedException()
     }
 
@@ -86,7 +89,7 @@ export class AccountController {
         required: false
     })
     @ApiResponse({ status: 200, description: 'Return accounts that meet the condition.', type: [Account] })
-    listAccount(@Body() option?: ListAccountOption) {
+    listAccount(@Body() option?: ListAccountOption): Account[] {
         throw new NotImplementedException()
     }
 
