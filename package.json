@@ -19,7 +19,9 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "//.1": "",
-        "genApi": "ts-node -r tsconfig-paths/register src/cli/genApi"
+        "genApi": "ts-node -r tsconfig-paths/register src/cli/genApi",
+        "cleanClient": "rimraf ./gen/client",
+        "genClient": "yarn cleanClient && openapi-generator-cli generate --enable-post-process-file -c openapi-generator.config.json -i ./dist/api-definition.json -g typescript-axios -o ./gen/client"
     },
     "dependencies": {
         "@nestjs/common": "^10.0.0",
@@ -34,6 +36,7 @@
         "@nestjs/cli": "^10.0.0",
         "@nestjs/schematics": "^10.0.0",
         "@nestjs/testing": "^10.0.0",
+        "@openapitools/openapi-generator-cli": "^2.13.5",
         "@types/express": "^4.17.17",
         "@types/jest": "^29.5.2",
         "@types/node": "^20.3.1",
@@ -45,6 +48,7 @@
         "eslint-plugin-prettier": "^5.0.0",
         "jest": "^29.5.0",
         "prettier": "^3.0.0",
+        "rimraf": "3.0.2",
         "source-map-support": "^0.5.21",
         "supertest": "^7.0.0",
         "ts-jest": "^29.1.0",
