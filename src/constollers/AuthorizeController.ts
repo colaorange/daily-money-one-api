@@ -1,4 +1,4 @@
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_BASIC } from '@/constants'
+import { API_KEY_NAME, HEADER_CONNECTION_TOKEN, TAG_BASIC } from '@/constants'
 import { Fail } from '@/model/Fail'
 import { Result } from '@/model/Result'
 import { AuthorizeService } from '@/services/AuthorizeService'
@@ -17,26 +17,26 @@ export class AuthorizeController {
     constructor(private readonly authorizeService: AuthorizeService) { }
 
     @Get()
-    @ApiOperation({ summary: 'Validate the password', operationId: "authorizeGet" })
+    @ApiOperation({ summary: 'Validate the token', operationId: "authorizeGet" })
     @ApiSecurity(API_KEY_NAME)
-    @ApiResponse({ status: 200, description: 'the given password is correct or not', content: Result.Content })
+    @ApiResponse({ status: 200, description: 'the given token is correct or not', content: Result.Content })
     authorizeGet(@Headers() headers: Record<string, string>): Result {
-        return this.authorizeService.authorize(headers[HEADER_CONNECTION_PASSWORD.toLowerCase()])
+        return this.authorizeService.authorize(headers[HEADER_CONNECTION_TOKEN.toLowerCase()])
     }
 
     // @Post() , return 201 for creation
     @Put()
-    @ApiOperation({ summary: 'Validate the password', operationId: "authorize" })
+    @ApiOperation({ summary: 'Validate the token', operationId: "authorize" })
     @ApiConsumes('text/plain')
     @ApiBody({
         schema: {
             type: 'string'
         },
-        description: 'the password',
+        description: 'the token',
     })
-    @ApiResponse({ status: 200, description: 'The given password is correct or not', content: Result.Content })
-    authorizePost(@Body() password: string): Result {
-        return this.authorizeService.authorize(password)
+    @ApiResponse({ status: 200, description: 'The given token is correct or not', content: Result.Content })
+    authorizePost(@Body() connectionToken: string): Result {
+        return this.authorizeService.authorize(connectionToken)
     }
 }
 

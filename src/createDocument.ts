@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { API_KEY_NAME, HEADER_CONNECTION_PASSWORD, TAG_ACCOUNT, TAG_BOOK, TAG_BASIC, TAG_REPORT, TAG_TRANSACTION } from './constants';
+import { API_KEY_NAME, HEADER_CONNECTION_TOKEN, TAG_ACCOUNT, TAG_BOOK, TAG_BASIC, TAG_REPORT, TAG_TRANSACTION } from './constants';
 import { AccountType } from './model/AccountType';
 
 export function createDocument(app: INestApplication) {
@@ -11,7 +11,7 @@ export function createDocument(app: INestApplication) {
         .setVersion('1.0.0')
         .addApiKey({
             type: 'apiKey',
-            name: HEADER_CONNECTION_PASSWORD,
+            name: HEADER_CONNECTION_TOKEN,
             in: 'header',
         }, API_KEY_NAME)
         .addTag(TAG_BASIC)

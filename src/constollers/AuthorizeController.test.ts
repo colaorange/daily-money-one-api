@@ -17,7 +17,7 @@ describe('AuthorizeController', () => {
 
     describe('root', () => {
         it('should return "OK abc"', () => {
-            const r = authorizeController.authorizeGet({ 'connection-password': 'abc' })
+            const r = authorizeController.authorizeGet({ 'connection-token': 'abc' })
             expect(r.message).toBe("OK abc")
         })
         it('should return "OK def"', () => {

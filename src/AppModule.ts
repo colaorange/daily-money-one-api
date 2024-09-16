@@ -4,7 +4,7 @@ import { BookController } from './constollers/BookController';
 import { AuthorizeService } from './services/AuthorizeService';
 import { AccountController } from './constollers/AccountController';
 import { ReportController } from './constollers/ReportController';
-import { ConfigurationController } from './constollers/ConfigurationController';
+import { ConfigurationController } from './constollers/PublicSettingController';
 import { PreferenceController } from './constollers/PreferencesController';
 import { TransactionController } from './constollers/TransactionController';
 

@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthorizeService {
-    authorize(password: string): Result {
-        return password ? {
-            message: `OK ${password}`
+    authorize(connectionToken: string): Result {
+        return connectionToken ? {
+            message: `OK ${connectionToken}`
         } : {
             error: true,
-            message: `Worng password`
+            message: `Worng token`
         }
     }
 }

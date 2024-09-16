@@ -12,9 +12,15 @@ async function bootstrap() {
     app.useGlobalFilters(new AppExceptionFilter());
     app.use(bodyParser.text({ type: 'text/plain' }));
 
+    app.enableCors({
+        origin: '*',
+        methods: '*',
+        maxAge: 86400
+    })
+
     //swagger
     const document = createDocument(app)
-    SwaggerModule.setup('api/ui.html', app, document)
+    SwaggerModule.setup('swagger/ui.html', app, document)
 
     await app.listen(port)
     console.log(`App listen on ${port}`)

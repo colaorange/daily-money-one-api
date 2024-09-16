@@ -1,6 +1,6 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 
-export class Configuration {
+export class PublicSetting {
 
     @ApiProperty({ description: '' })
     language: string
@@ -15,7 +15,7 @@ export class Configuration {
     translation: Record<string, any>
 
 
-    static Example: Configuration = {
+    static Example: PublicSetting = {
         language: 'zh',
         translation: {
             'key': 'value'
@@ -25,9 +25,9 @@ export class Configuration {
     static Content = {
         "application/json": {
             schema: {
-                $ref: getSchemaPath(Configuration)
+                $ref: getSchemaPath(PublicSetting)
             },
-            example: Configuration.Example
+            example: PublicSetting.Example
         }
     }
 }
