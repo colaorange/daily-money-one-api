@@ -1,6 +1,10 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
+import { Profile } from './Profile'
 
 export class Preferences{
+
+    @ApiProperty({ description: '', required: false })
+    profile?: Profile
 
     @ApiProperty({ description: '' })
     dateTimeFormat: string
@@ -12,6 +16,9 @@ export class Preferences{
     timeFormat: string
 
     static Example: Preferences = {
+        profile: {
+            name: 'Dennis'
+        },
         dateFormat: 'YYYY/MM/DD',
         timeFormat: 'HH:mm',
         dateTimeFormat: 'YYYY/MM/DD HH:mm'
