@@ -6,6 +6,9 @@ export class Preferences{
     @ApiProperty({ description: '', required: false })
     profile?: Profile
 
+    @ApiProperty({ description: '', required: false  })
+    primaryBookId?: string
+
     @ApiProperty({ description: '' })
     dateTimeFormat: string
 

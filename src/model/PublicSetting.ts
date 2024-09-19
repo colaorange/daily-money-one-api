@@ -1,4 +1,5 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
+import { ColorScheme } from './ColorScheme'
 
 export class PublicSetting {
 
@@ -14,12 +15,14 @@ export class PublicSetting {
     })
     translation: Record<string, any>
 
+    @ApiProperty({ description: '' })
+    colorScheme: ColorScheme
 
-    static Example: PublicSetting = {
+    static Example: Partial<PublicSetting> = {
         language: 'zh',
         translation: {
             'key': 'value'
-        }
+        },
     }
 
     static Content = {
