@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { API_KEY_NAME, HEADER_CONNECTION_TOKEN, TAG_ACCOUNT, TAG_BOOK, TAG_BASIC, TAG_REPORT, TAG_TRANSACTION } from './constants';
 import { AccountType } from './model/AccountType';
+import { FirstDayOfWeek } from './model/FirstDayOfWeek';
 
 export function createDocument(app: INestApplication) {
     //swagger
@@ -26,6 +27,10 @@ export function createDocument(app: INestApplication) {
     doc.components.schemas['AccountType'] = {
         type: 'string',
         enum: Object.values(AccountType)
+    }
+    doc.components.schemas['FirstDayOfWeek'] = {
+        type: 'string',
+        enum: Object.values(FirstDayOfWeek)
     }
 
     //sort path

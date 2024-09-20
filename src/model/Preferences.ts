@@ -1,12 +1,13 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
+import { FirstDayOfWeek, FirstDayOfWeekRefPath } from './FirstDayOfWeek'
 import { Profile } from './Profile'
 
-export class Preferences{
+export class Preferences {
 
     @ApiProperty({ description: '', required: false })
     profile?: Profile
 
-    @ApiProperty({ description: '', required: false  })
+    @ApiProperty({ description: '', required: false })
     primaryBookId?: string
 
     @ApiProperty({ description: '' })
@@ -18,13 +19,17 @@ export class Preferences{
     @ApiProperty({ description: '' })
     timeFormat: string
 
+    @ApiProperty({ description: '', allOf: [{ $ref: FirstDayOfWeekRefPath }] })
+    firstDayOfWeek: FirstDayOfWeek
+
     static Example: Preferences = {
         profile: {
             name: 'Dennis'
         },
         dateFormat: 'YYYY/MM/DD',
         timeFormat: 'HH:mm',
-        dateTimeFormat: 'YYYY/MM/DD HH:mm'
+        dateTimeFormat: 'YYYY/MM/DD HH:mm',
+        firstDayOfWeek: FirstDayOfWeek.Sun
     }
 
     static Content = {
