@@ -17,7 +17,7 @@ import { ApiBody, ApiExtraModels, ApiOperation, ApiParam, ApiResponse, ApiSecuri
 export class ReportController {
     constructor() { }
 
-    @Put('report/book-balance/:id/')
+    @Put('report/book-balance/:id')
     @ApiOperation({ summary: 'Report balance of a book', operationId: "reportBookBalance" })
     @ApiParam({ name: 'id', description: 'The id of the book' })
     @ApiBody({
