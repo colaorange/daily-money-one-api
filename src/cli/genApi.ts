@@ -2,7 +2,7 @@ import { AppModule } from '@/AppModule';
 import { createDocument } from '@/createDocument';
 import { NestFactory } from '@nestjs/core';
 
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 import * as path from 'path';
 
 async function genApi() {
@@ -11,6 +11,9 @@ async function genApi() {
     const document = createDocument(app)
 
     const definitionPath = path.resolve(process.cwd(), './dist/api-definition.json')
+
+    const dirPath = path.dirname(definitionPath);
+    mkdirSync(dirPath, { recursive: true})
 
     writeFileSync(definitionPath, JSON.stringify(document, undefined, 2));
 
