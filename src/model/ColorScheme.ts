@@ -159,5 +159,7 @@ export class ColorScheme {
     backdrop: string;
     @ApiProperty({ description: '' })
     elevation: ElevationColors;
+    @ApiProperty({ description: '', type: ['string'] })
+    chartColorPalette: string[]
 }
 

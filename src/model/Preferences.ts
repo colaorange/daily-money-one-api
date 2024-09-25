@@ -1,6 +1,7 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 import { FirstDayOfWeek, FirstDayOfWeekRefPath } from './FirstDayOfWeek'
 import { Profile } from './Profile'
+import { AccountType, AccountTypeRefPath } from './AccountType'
 
 export class Preferences {
 
@@ -21,6 +22,22 @@ export class Preferences {
 
     @ApiProperty({ description: '', allOf: [{ $ref: FirstDayOfWeekRefPath }] })
     firstDayOfWeek: FirstDayOfWeek
+
+
+    @ApiProperty({ description: '', required: false })
+    fixBalanceFractionDigits?: boolean
+
+    @ApiProperty({ description: '', required: false })
+    hideEmptyBalance?: boolean
+    
+    @ApiProperty({
+        description: "",
+        required: false,
+        isArray: true,
+        allOf: [{ $ref: AccountTypeRefPath }]
+    })
+    balanceAccountTypeOrder?: AccountType[]
+
 
     static Example: Preferences = {
         profile: {
