@@ -20,6 +20,12 @@ export class Preferences {
     @ApiProperty({ description: '' })
     timeFormat: string
 
+    @ApiProperty({ description: '' })
+    monthFormat: string
+
+    @ApiProperty({ description: '' })
+    timeZone: string
+
     @ApiProperty({ description: '', allOf: [{ $ref: FirstDayOfWeekRefPath }] })
     firstDayOfWeek: FirstDayOfWeek
 
@@ -43,9 +49,11 @@ export class Preferences {
         profile: {
             name: 'Dennis'
         },
+        monthFormat: 'YYYY/MM' ,
         dateFormat: 'YYYY/MM/DD',
         timeFormat: 'HH:mm',
         dateTimeFormat: 'YYYY/MM/DD HH:mm',
+        timeZone: 'Asia/Taipei',
         firstDayOfWeek: FirstDayOfWeek.Sun
     }
 
