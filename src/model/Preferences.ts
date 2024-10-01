@@ -44,6 +44,9 @@ export class Preferences {
     })
     balanceAccountTypeOrder?: AccountType[]
 
+    @ApiProperty({ description: '', required: false })
+    adsLevel?: number
+
 
     static Example: Preferences = {
         profile: {

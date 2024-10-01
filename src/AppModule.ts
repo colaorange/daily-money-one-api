@@ -7,6 +7,7 @@ import { ReportController } from './constollers/ReportController';
 import { ConfigurationController } from './constollers/PublicSettingController';
 import { PreferenceController } from './constollers/PreferencesController';
 import { TransactionController } from './constollers/TransactionController';
+import { WatchAdsController } from './constollers/WatchAds';
 
 
 @Module({
@@ -19,6 +20,7 @@ import { TransactionController } from './constollers/TransactionController';
         AccountController, 
         TransactionController,
         ReportController,
+        WatchAdsController
     ],
     providers: [AuthorizeService],
 })
