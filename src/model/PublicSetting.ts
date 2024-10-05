@@ -18,6 +18,9 @@ export class PublicSetting {
     @ApiProperty({ description: '' })
     colorScheme: ColorScheme
 
+    @ApiProperty({ description: '', required: false })
+    adsLevel?: number
+
     static Example: Partial<PublicSetting> = {
         language: 'zh',
         translation: {
