@@ -28,6 +28,20 @@ export class ListTransactionOption {
     })
     accountIds?: string[]
 
+    @ApiProperty({
+        description: "Withdrawal account ids to include",
+        required: false,
+        type: ['string']
+    })
+    withdrawalAccountIds?: string[]
+
+    @ApiProperty({
+        description: "Deposit account ids to include",
+        required: false,
+        type: ['string']
+    })
+    depositAccountIds?: string[]
+
 
     @ApiProperty({
         description: "Account types to include",
