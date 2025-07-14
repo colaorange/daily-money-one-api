@@ -2,6 +2,13 @@
 
 The API For Daily Money One Server Mode
 
+
+# Project Prerequisites
+
+- Node.js version 20 or above is required
+- Global installation of yarn package manager is required
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -48,6 +55,9 @@ $ yarn run start:dev
 # production mode
 $ yarn run start:prod
 ```
+
+## Api Link
+  http://127.0.0.1:3000/swagger/ui.html
 
 ## Run tests
 

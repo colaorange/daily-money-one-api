@@ -2,6 +2,8 @@ import { ApiProperty, getSchemaPath } from '@nestjs/swagger'
 import { FirstDayOfWeek, FirstDayOfWeekRefPath } from './FirstDayOfWeek'
 import { Profile } from './Profile'
 import { AccountType, AccountTypeRefPath } from './AccountType'
+import { FirstDayOfMonth } from './FirstDayOfMonth'
+import { FirstDayOfYear } from './FirstDayOfYear'
 
 export class Preferences {
 
@@ -29,6 +31,12 @@ export class Preferences {
     @ApiProperty({ description: '', allOf: [{ $ref: FirstDayOfWeekRefPath }] })
     firstDayOfWeek: FirstDayOfWeek
 
+    @ApiProperty({ description: '', minimum: 1, maximum: 28, type: Number })
+    firstDayOfMonth: FirstDayOfMonth
+
+    @ApiProperty({ description: '', type: [Number], minItems: 2, maxItems: 2 })
+    firstDayOfYear: FirstDayOfYear
+
 
     @ApiProperty({ description: '', required: false })
     fixBalanceFractionDigits?: boolean
@@ -53,7 +61,9 @@ export class Preferences {
         timeFormat: 'HH:mm',
         dateTimeFormat: 'YYYY/MM/DD HH:mm',
         timeZone: 'Asia/Taipei',
-        firstDayOfWeek: FirstDayOfWeek.Sun
+        firstDayOfWeek: FirstDayOfWeek.Sun,
+        firstDayOfMonth: 1,
+        firstDayOfYear: [0, 1]
     }
 
     static Content = {
