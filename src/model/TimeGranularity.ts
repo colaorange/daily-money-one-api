@@ -1,5 +1,5 @@
 
-export const AccountTypeRefPath = '#/components/schemas/AccountType'
+export const TimeGranularityRefPath = '#/components/schemas/TimeGranularity'
 
 export enum TimeGranularity {
     DAILY = 'daily',
